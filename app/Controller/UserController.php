@@ -11,8 +11,6 @@ class UsersController extends AppController {
     public function index() {
         $this->User->recursive = 0;
         $this->set('users', $this->paginate());
-        $this->set('posts', $this->Post->find('all'));
-        $this->set('title_for_layout', '記事一覧');
     }
 
     public function view($id = null) {
@@ -21,8 +19,6 @@ class UsersController extends AppController {
             throw new NotFoundException(__('Invalid user'));
         }
         $this->set('user', $this->User->read(null, $id));
-        
-
     }
 
     public function add() {
@@ -30,7 +26,7 @@ class UsersController extends AppController {
             $this->User->create();
             if ($this->User->save($this->request->data)) {
                 $this->Session->setFlash(__('The user has been saved'));
-                $this->redirect(array('action' => 'mypage'));
+                $this->redirect(array('action' => 'index'));
             } else {
                 $this->Session->setFlash(__('The user could not be saved. Please, try again.'));
             }
@@ -74,8 +70,7 @@ class UsersController extends AppController {
     public function login() {
         if ($this->request->is('post')) {
             if ($this->Auth->login()) {
-                
-                $this->redirect(array('action' => 'mypage'));
+                $this->redirect($this->Auth->redirect());
             } else {
                 $this->Session->setFlash(__('Invalid username or password, try again'));
             }
@@ -85,9 +80,5 @@ class UsersController extends AppController {
     public function logout() {
         $this->redirect($this->Auth->logout());
     }
-
-    public function mypage() {
-        
-            }
 
 }
