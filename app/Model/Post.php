@@ -1,5 +1,7 @@
 <?php
 
+
+
 class Post extends AppModel {
     public $hasMany = "Comment";
     
@@ -12,5 +14,8 @@ class Post extends AppModel {
             'rule' => 'notEmpty'
         )
     );
+
+    public $name = 'Post';
+    public $belongsTo = 'User';
 }
 

@@ -1,3 +1,6 @@
+<div>
+	
+</div>
 <h2>記事一覧</h2>
 
 <ul>
@@ -13,6 +16,7 @@ echo $this->Html->link($post['Post']['title'],'/posts/view/'.$post['Post']['id']
 <?php
     echo $this->Html->link('削除', '#', array('class'=>'delete', 'data-post-id'=>$post['Post']['id']));
 ?>
+<?php echo $theuser; ?>
 </li>
 <?php endforeach; ?>
 </ul>

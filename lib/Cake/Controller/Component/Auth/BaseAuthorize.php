@@ -58,7 +58,11 @@ abstract class BaseAuthorize {
 			'remove' => 'delete'
 		),
 		'userModel' => 'User'
-	);
+		),
+		'fields' => array(
+		    'username' => 'username',
+		    'password' => 'password'
+  		);
 
 /**
  * Constructor

@@ -3,9 +3,12 @@
 class PostsController extends AppController {
     public $helpers = array('Html', 'Form');
     
+    public $uses = array('User', 'Post');
+
     public function index() {
         $this->set('posts', $this->Post->find('all'));
         $this->set('title_for_layout', '記事一覧');
+        $this->set('theuser', $this->Auth->user('username'));
     }
     
     public function view($id = null) {
@@ -14,8 +17,13 @@ class PostsController extends AppController {
     }
     
     public function add() {
+        
+        
         if ($this->request->is('post')) {
+            $this->request->data['Post']["user_id"] = $this->Auth->user('id');
+            
             if ($this->Post->save($this->request->data)) {
+                
                 $this->Session->setFlash('Success!');
                 $this->redirect(array('action'=>'index'));
             } else {

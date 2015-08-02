@@ -1,5 +1,10 @@
 <?php
 
+
+
+
+
+
 App::uses('AppModel', 'Model');
 App::uses('BlowfishPasswordHasher', 'Controller/Component/Auth');
 
@@ -10,6 +15,12 @@ class User extends AppModel {
             'required' => array(
                 'rule' => array('notEmpty'),
                 'message' => 'A username is required'
+            )
+        ),
+        'email' => array(
+            'required' => array(
+                'rule' => array('notEmpty'),
+                'message' => 'An email is required'
             )
         ),
         'password' => array(
@@ -36,6 +47,19 @@ class User extends AppModel {
 	    }
 	    return true;
 	}
+
+	public $name = 'User';
+	public $hasMany = array('Post' =>
+                    array('className' => 'Post',
+                          'conditions' => '',
+                          'order' => '',
+                          'foreignKey' => 'user_id',
+                          'dependent' => true,
+                          'exclusive' => false,
+                          'finderQuery' => ''
+                    )
+                  );
+
 
 }
 

@@ -2,11 +2,18 @@
 
 class UsersController extends AppController {
 
+    public $helpers = array('Html', 'Form');
+
     public function beforeFilter() {
         parent::beforeFilter();
         // ユーザー自身による登録とログアウトを許可する
         $this->Auth->allow('add', 'logout');
+
+        
     }
+
+    
+
 
     public function index() {
         $this->User->recursive = 0;
@@ -72,22 +79,33 @@ class UsersController extends AppController {
     
 
     public function login() {
-        if ($this->request->is('post')) {
-            if ($this->Auth->login()) {
-                
+        if ($this->request->is('post')){
+            if ($this->Auth->login()) 
+        //正しい値が帰ってきている
+            {
+
                 $this->redirect(array('action' => 'mypage'));
             } else {
                 $this->Session->setFlash(__('Invalid username or password, try again'));
             }
         }
+        
     }
 
     public function logout() {
         $this->redirect($this->Auth->logout());
     }
 
+    
     public function mypage() {
+        $this->set('users', $this->User->find('all'));
+        $this->set('all_users', 'ユーザ一覧');
+        $this->set('theuser', $this->Auth->user('username'));
+        $this->set('user_posts', $this->User->Post->find('user_id'));
+
+    }
         
-            }
+    
+
 
 }

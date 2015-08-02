@@ -37,6 +37,8 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
     <script src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
 </head>
 <body>
+    
+
     <div id="container">
         <div id="header">
             <h1><?php echo $this->Html->link('Home', '/'); ?></h1>
