@@ -3,9 +3,10 @@
 <p><?php echo h($post['Post']['body']); ?></p>
 
 <h2>Comments</h2>
-
 <ul>
 <?php foreach ($post['Comment'] as $comment): ?>
+
+
 <li id="comment_<?php echo h($comment['id']); ?>">
 <?php echo h($comment['body']) ?> by <?php echo h($comment['commenter']); ?> 
 <?php

@@ -4,6 +4,8 @@ class UsersController extends AppController {
 
     public $helpers = array('Html', 'Form');
 
+    public $uses = array('User', 'Post');
+
     public function beforeFilter() {
         parent::beforeFilter();
         // ユーザー自身による登録とログアウトを許可する
@@ -12,14 +14,13 @@ class UsersController extends AppController {
         
     }
 
-    
-
-
     public function index() {
-        $this->User->recursive = 0;
-        $this->set('users', $this->paginate());
+       /* $this->User->recursive = 0;
+        $this->set('users', $this->paginate());*/
         $this->set('posts', $this->Post->find('all'));
+        //$this->set('posts', $this->Post->findAllByuser_id($this->Auth->user('id')));
         $this->set('title_for_layout', '記事一覧');
+        
     }
 
     public function view($id = null) {
@@ -84,7 +85,7 @@ class UsersController extends AppController {
         //正しい値が帰ってきている
             {
 
-                $this->redirect(array('action' => 'mypage'));
+                $this->redirect(array('action' => 'index'));
             } else {
                 $this->Session->setFlash(__('Invalid username or password, try again'));
             }
@@ -98,11 +99,14 @@ class UsersController extends AppController {
 
     
     public function mypage() {
-        $this->set('users', $this->User->find('all'));
-        $this->set('all_users', 'ユーザ一覧');
-        $this->set('theuser', $this->Auth->user('username'));
-        $this->set('user_posts', $this->User->Post->find('user_id'));
-
+//$this->log("mypage start", 'debug');
+     //   $this->set('posts', $this->Post->find('all'));
+//$this->log($this->Post->find('all'), 'debug');
+        //debug($limited);//値入っていました。
+//$this->log($limited['User'], 'debug');
+        $this->set('user_posts', $this->Post->findAllByUserId($this->request->params['id']));
+//$this->log($this->Post->findAllByuser_id($posts['User']['id']), 'debug');
+        //$this->set('posts', $this->Post->findAllByuser_id($this->Auth->user('id')));
     }
         
     

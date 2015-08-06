@@ -1,12 +1,25 @@
 <h2>記事一覧</h2>
-
+<?php echo $this->Html->link('ログアウト', array('action'=>'logout')); ?> 
 <ul>
-<?php echo "a"; ?>
-<li id="post_<?php echo h($post['Post']['id']); ?>">
 
-<h2>Add Post</h2>
-<?php echo $this->Html->link('Add post', array('controller'=>'posts','action'=>'add'));
+<?php foreach ($posts as $post) : ?>
+
+
+<li>
+<?php echo $this->Html->link($post['Post']['title'],'/posts/view/'.$post['Post']['id']);
 ?>
+
+<?php echo $this->Html->link($post['User']['username'],'/users/mypage/'.$post['User']['id']);
+?>
+
+</li>
+<?php endforeach; ?>
+
+
+
+
+
+
 
 <script>
 $(function() {
