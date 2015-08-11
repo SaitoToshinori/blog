@@ -1,15 +1,17 @@
-<h2>記事一覧</h2>
+<h2>ユーザー一覧</h2>
 <?php echo $this->Html->link('ログアウト', array('action'=>'logout')); ?> 
 <ul>
 
-<?php foreach ($posts as $post) : ?>
+
+<?php foreach ($users as $user) : ?>
 
 
 <li>
-<?php echo $this->Html->link($post['Post']['title'],'/posts/view/'.$post['Post']['id']);
-?>
 
-<?php echo $this->Html->link($post['User']['username'],'/users/mypage/'.$post['User']['id']);
+
+<?php echo $this->Html->link($user['User']['username'],'/users/mypage/'.$user['User']['id']);
+
+
 ?>
 
 </li>
