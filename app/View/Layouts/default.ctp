@@ -41,13 +41,24 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
 
     <div id="container">
         <div id="header">
-            <h1><?php echo $this->Html->link('Home', '/'); ?></h1>
+            <h1><?php echo $this->Html->link('Home', '/'); ?>
+                
+            <div style="text-align:right">
+                <?php if($auth->loggedIn()) {
+                        echo $this->Html->link($auth->user('username'), '/users/mypage/'.$auth->user('id'));
+                      }else{
+                        echo $this->Html->link('ログイン', '/users/login');
+                        echo $this->Html->link('ユーザー登録', '/users/add');
+                      }
+                ?>
+            </div>
+            </h1>
         </div>
         <div id="content">
 
             <?php echo $this->Session->flash(); ?>
 
-            <?php echo $this->fetch('content'); ?>
+            <?php echo $this->fetch('content');//ここでViewを拾っている ?>
         </div>
         <div id="footer">
             <?php echo $this->Html->link(
