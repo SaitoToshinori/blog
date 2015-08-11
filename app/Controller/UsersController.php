@@ -20,7 +20,7 @@ class UsersController extends AppController {
         $this->set('posts', $this->Post->find('all'));
         //$this->set('posts', $this->Post->findAllByuser_id($this->Auth->user('id')));
         $this->set('title_for_layout', '記事一覧');
-        
+        $this->set('users', $this->User->find('all'));
     }
 
     public function view($id = null) {
