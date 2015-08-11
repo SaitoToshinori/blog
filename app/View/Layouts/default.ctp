@@ -58,7 +58,7 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
 
             <?php echo $this->Session->flash(); ?>
 
-            <?php echo $this->fetch('content');//ここでViewを拾っている ?>
+            <?php echo $this->fetch('content'); ?>
         </div>
         <div id="footer">
             <?php echo $this->Html->link(
