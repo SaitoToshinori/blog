@@ -12,11 +12,12 @@
 // 
 echo $this->Html->link($post['Post']['title'],'/posts/view/'.$post['Post']['id']);
 ?> 
+<?php echo $this->Html->link($post['User']['username'],'/users/mypage/'.$post['User']['id']); ?>
 <?php echo $this->Html->link('編集', array('action'=>'edit', $post['Post']['id'])); ?> 
 <?php
     echo $this->Html->link('削除', '#', array('class'=>'delete', 'data-post-id'=>$post['Post']['id']));
 ?>
-<?php echo $theuser; ?>
+
 </li>
 <?php endforeach; ?>
 </ul>
