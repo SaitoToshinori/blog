@@ -1,7 +1,5 @@
-<h1><?php echo $user_posts[0]['User']['username']?>のマイページ</h1>
+<h1><?php echo $auth->user('username')?>のマイページ</h1>
 
-
-<?php echo $this->Html->link('ログアウト', array('action'=>'logout')); ?> 
 
 <ul>
 
