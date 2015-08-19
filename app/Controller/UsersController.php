@@ -39,11 +39,10 @@ class UsersController extends AppController {
             $this->User->create();
 
             if ($this->User->save($this->request->data)) {
-                $this->request->data = array(
-                      'email' => $this->request->data['User']['email'],
-                      'password' => $this->request->data['User']['password']
-                      );
-                $data = $this->request->data;
+                        $data = array(
+                          'email' => $this->request->data['User']['email'],
+                          'password' => $this->request->data['User']['password']
+                        );
                 if ($this->Auth->login($data)) {
                     $this->Session->setFlash(__('The user has been saved'));
                     $this->redirect(array('action' => 'mypage'));
