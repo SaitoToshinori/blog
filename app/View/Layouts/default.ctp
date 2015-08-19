@@ -46,7 +46,7 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
             <div style="text-align:right">
                 <?php if($auth->loggedIn()) {
                         echo $this->Html->link($auth->user('username'), '/users/mypage/'.$auth->user('id'));
-                        echo $this->Html->link('ログアウト', array('action'=>'logout'));
+                        echo $this->Html->link('ログアウト', '/users/logout');
                       }else{
                         echo $this->Html->link('ログイン', '/users/login');
                         echo $this->Html->link('ユーザー登録', '/users/add');
