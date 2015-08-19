@@ -1,4 +1,4 @@
-<h1><?php echo $auth->user('username')?>のマイページ</h1>
+<h1>マイページ</h1>
 
 
 <ul>
