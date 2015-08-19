@@ -216,7 +216,7 @@
  *
  */
 	Configure::write('Session', array(
-		'defaults' => 'cake'
+		'defaults' => 'php'
 	));
 
 /**
