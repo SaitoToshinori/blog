@@ -7,7 +7,7 @@ class CommentsController extends AppController {
         if ($this->request->is('post')) {
             if ($this->Comment->save($this->request->data)) {
                 $this->Session->setFlash('Success!');
-                $this->redirect(array('controller'=>'posts','action'=>'view',$this->data['Comment']['post_id']));
+                $this->redirect(array('controller'=>'posts','action'=>'view',$this->request->data['Comment']['post_id']));
             } else {
                 $this->Session->setFlash('failed!');
             }
