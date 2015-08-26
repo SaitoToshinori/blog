@@ -17,11 +17,7 @@ class TagsController extends AppController {
 	    	//$this->set('tags',$this->Tag->find('all'));
 	    	$this->set('tags', $this->Tag->find('all', array(
             'conditions' => array('Tag.id' => $this->request->params['id']))));
-            
-
-
-	    
-	    }
+        }
 	   
 	    public function add() {
 	    	if ($this->request->is('post')) {

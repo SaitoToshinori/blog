@@ -26,7 +26,6 @@
     echo $this->Html->link('削除', '#', array('class'=>'delete', 'data-tag-id'=>$tag['id']));
 ?>
 
-
 </li>
 <?php endforeach; ?>
 </ul>

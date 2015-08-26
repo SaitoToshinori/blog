@@ -1,6 +1,5 @@
 <h1>タグ</h1>
 
-
 <ul>
 <?php var_dump($tags); ?>
 <?php foreach ($tags as $tag): ?>

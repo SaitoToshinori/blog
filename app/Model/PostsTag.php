@@ -30,5 +30,4 @@ class PostsTag extends AppModel {
         ));
         return $existingPromoCount < $limit;
     }
-}
-    
+}  
