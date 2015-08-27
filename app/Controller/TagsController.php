@@ -34,7 +34,7 @@ class TagsController extends AppController {
         	}
         	*/
         	/* ここから確認
-			if ($this->request->is('post')) {//①タグの存在確認　	setflashで失敗！	
+			if ($this->request->is('post')) {//①タグの存在確認　	
 				$sql = tagsテーブルからtag.idを検索するセレクト文。条件は、テーブルに既にあるnameとpostされてきたもののnameキーに入っている値が一致するもの。
 				$hoge = queryメソッドで$sqlを使って検索、その際に$sqlで設定したプレースホルダーのことに注意する。
 				
@@ -52,6 +52,7 @@ class TagsController extends AppController {
 						setFlashで既にあります。
 					} else {
 						save($huga);
+						現在のページにリダイレクト
 					}
 					
 
