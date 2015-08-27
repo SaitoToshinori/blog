@@ -10,9 +10,13 @@ class PostsController extends AppController {
         $this->set('title_for_layout', '記事一覧');
     }
     
-    public function view($id = null) {
+    public function view() {
+        $id = $this->request->params['id'];
         $this->Post->id = $id;
         $this->set('post', $this->Post->read());
+       // var_dump($this->Post->read());
+        var_dump($this->Post->id);
+        
     }
     
     public function add() {
