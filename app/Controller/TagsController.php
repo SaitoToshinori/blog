@@ -34,24 +34,34 @@ class TagsController extends AppController {
         	}
         	*/
         	/* ここから確認
-			$sql = tagsテーブルからポストされてきたtag.nameと一致するものがあるなら持ってくるというセレクト文
-			$hoge = モデルのqueryメソッドで$sqlを引数にして、$sqlで設定していたプレースホルダーの処理を書いたものを変数に代入
+			if ($this->request->is('post')) {//①タグの存在確認　	setflashで失敗！	
+				$sql = tagsテーブルからtag.idを検索するセレクト文。条件は、テーブルに既にあるnameとpostされてきたもののnameキーに入っている値が一致するもの。
+				$hoge = queryメソッドで$sqlを使って検索、その際に$sqlで設定したプレースホルダーのことに注意する。
+				
+				if ($hogeが空だったら) {//②タグが登録されていなかった場合の処理
+					ポストされてきたデータの中のTag.nameを連想配列の形になるようにしてtagsにsave
+					$hogeと似た要領で、nameカラムを使って、新しく追加したデータのidを取得
+	
+				} else { //③タグが登録されていたら場合の処理
+					$huga = [
+						'post_id' => ['PostsTag']['post_id'],
+						'tag_id' =>  ①で得たクエリメソッドからデータを弄ってtagのidを取得
+					];
+					//④saveする処理
+					if(posts_tagsテーブルを検索。条件はこれから紐付けようとしているtag_idがすでに紐付いているかどうか) {
+						setFlashで既にあります。
+					} else {
+						save($huga);
+					}
+					
 
-			if($hogeの中身が空なら){
-				//こちらには新規作成のフロー
-				if(ビューのフォームからpost送信されてきたら) {
-						tagsテーブルに送信されてきたデータの中でTag.nameのデータを連想配列でsave
-						今新たに保存されたレコードのidを取得し$tagIdに代入
 				}
-			} else {
-				$hogeでTag.idのデータがとれているので、それを連想配列の構造で$tagIdに代入
+
+
+			} else {//getなどでアクセスしてきたら、データがおかしかったら
+				setFlashでfailed
+				
 			}
-
-			$huga = 連想配列の構造でpost_idに、ポストされてきたデータからposts/view/○の○の部分=idを代入
-					tag_idにはtag_idに、$tagIdを代入
-
-			posts_tagsテーブルに$hugaをsave
-
 
         	*/
 
