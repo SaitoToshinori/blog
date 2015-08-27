@@ -20,8 +20,6 @@ class TagsController extends AppController {
         }
 	   
 	    public function add() {
-
-	    	
 	    	/*if ($this->request->is('post')) {
 	    		var_dump($this->request->data);
             if ($this->PostsTag->save($this->request->data)) {
@@ -33,15 +31,17 @@ class TagsController extends AppController {
             }
         	}
         	*/
-        	/* ここから確認
+
 			if ($this->request->is('post')) {//①タグの存在確認　	
-				$sql = tagsテーブルからtag.idを検索するセレクト文。条件は、テーブルに既にあるnameとpostされてきたもののnameキーに入っている値が一致するもの。
-				$hoge = queryメソッドで$sqlを使って検索、その際に$sqlで設定したプレースホルダーのことに注意する。
+				$sql = "SELECT Tag.id FROM tags AS Tag WHERE Tag.name = ?";
+				$rows = $this->Tag->query($sql, Hash::get($this->request->data, 'Tag.name'));
+				//$sql = tagsテーブルからtag.idを検索するセレクト文。条件は、テーブルに既にあるnameとpostされてきたもののnameキーに入っている値が一致するもの。
+				//$hoge = queryメソッドで$sqlを使って検索、その際に$sqlで設定したプレースホルダーのことに注意する。
 				
-				if ($hogeが空だったら) {//②タグが登録されていなかった場合の処理
+				if (empty($rows)) {//②タグが登録されていなかった場合の処理
 					ポストされてきたデータの中のTag.nameを連想配列の形になるようにしてtagsにsave
 					$hogeと似た要領で、nameカラムを使って、新しく追加したデータのidを取得
-	
+	/*
 				} else { //③タグが登録されていたら場合の処理
 					$huga = [
 						'post_id' => ['PostsTag']['post_id'],
@@ -63,12 +63,9 @@ class TagsController extends AppController {
 				setFlashでfailed
 				
 			}
-
-        	*/
-
+    
             
-            
-            
+            */
         }
 	    
 	    
