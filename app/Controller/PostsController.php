@@ -13,7 +13,7 @@ class PostsController extends AppController {
     }
     
     public function view($id = null) {
-        $this->Post->id = $id;
+        $this->Post->id = $this->request->params['id'];
         $this->set('post', $this->Post->read());
         var_dump($this->Post->read());
         //$this->set('posts', $this->Post->find('all'));
