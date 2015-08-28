@@ -10,13 +10,13 @@ class TagsController extends AppController {
 		public function index() {
 			$this->set('tags', $this->Tag->find('all'));
 			
+			
         
     	}
     
 	    public function view($id = null) {
-	    	//$this->set('tags',$this->Tag->find('all'));
-	    	$this->set('tags', $this->Tag->find('all', array(
-            'conditions' => array('Tag.id' => $this->request->params['id']))));
+	    	$this->Tag->id = $this->request->params['id'];
+        	$this->set('tag', $this->Tag->read());
         }
 	   
 	    public function add() {
