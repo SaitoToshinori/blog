@@ -15,7 +15,7 @@ class PostsController extends AppController {
     public function view($id = null) {
         $this->Post->id = $this->request->params['id'];
         $this->set('post', $this->Post->read());
-        var_dump($this->Post->read());
+        //var_dump($this->Post->read());
         //$this->set('posts', $this->Post->find('all'));
         // $this->set('post', $this->Post->find('all', array(
         //     'conditions' => array('Post.id' => $this->request->params['id']))));
