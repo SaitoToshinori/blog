@@ -19,7 +19,7 @@
 <ul>
 <?php foreach ((array)$post['Tag'] as $tag): ?>
 
-<li id="tag_<?php echo h($tag['name']); ?>">
+<li id="tag_<?php echo h($tag['id']); ?>">
 <?php echo $this->Html->link(h($tag['name']),'/tags/view/'.$tag['id']) ?>
 
 <?php
@@ -77,6 +77,13 @@ $(function() {
 
  
 <!--
+if(自分の記事ではないのなら or まだ押されていないのなら) {
+	formヘルパーでお気に入りボタンを作る。
+	押されたら押せないようにチェンジ	
+} else {
+	お気に入りできません
+}
+//以下のはおおまかな方針
 お気に入りの登録方法で
 フォームヘルパーを使って登録をする。
 お気に入りがされていなかったら、お気に入りにする、というボタンを表示して、
