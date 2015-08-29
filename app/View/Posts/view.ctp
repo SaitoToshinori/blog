@@ -66,7 +66,7 @@ $(function() {
     $('a.delete').click(function(e) {
         if (confirm('sure?')) {
             $.post('/blog/tags/delete/'+$(this).data('tag-id'), {}, function(res) {
-                $('#comment_'+res.id).fadeOut();
+                $('#tag_'+res.id).fadeOut();
             }, "json");
         }
         return false;
@@ -76,6 +76,13 @@ $(function() {
 
 
  
-
+<!--
+お気に入りの登録方法で
+フォームヘルパーを使って登録をする。
+お気に入りがされていなかったら、お気に入りにする、というボタンを表示して、
+すでにされている、もしくは自分の記事なら、お気に入り済または、お気に入りできませんという表示にする。
+できないような仕組みを考えなくては！
+裏っかわでpostとuserの情報をひもづける
+-->
 
 
