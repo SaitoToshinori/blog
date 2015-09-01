@@ -74,5 +74,12 @@ class PostsController extends AppController {
         }
         $this->redirect(array('action'=>'index'));
     }
-
+    /*
+    public function search() {
+        もしgetでアクセスが来たら(検索ということもあり)
+        検索キーワードをあいまい検索として、データを取得する。この時にLIKEを使ったり、%にエスケープ処理を施す
+        上の結果を変数としてビューに渡す
+        また、検索キーワードもビューに渡す
+    }
+    */
 }
