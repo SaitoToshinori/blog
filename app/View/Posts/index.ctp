@@ -7,9 +7,6 @@
 <?php foreach ($posts as $post) : ?>
 <li id="post_<?php echo h($post['Post']['id']); ?>">
 <?php
-// debug($post);
-// echo h($post['Post']['title']);
-// 
 echo $this->Html->link($post['Post']['title'],'/posts/view/'.$post['Post']['id']);
 ?> 
 <?php echo $this->Html->link($post['User']['username'],'/users/mypage/'.$post['User']['id']); ?>
