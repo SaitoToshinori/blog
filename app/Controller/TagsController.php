@@ -20,18 +20,6 @@ class TagsController extends AppController {
         }
 	   
 	    public function add() {
-	    	/*
-	    	if ($this->request->is('post')) {
-	    		var_dump($this->request->data);
-	            if ($this->PostsTag->save($this->request->data)) {
-	                $this->Session->setFlash('Success!');
-	                $this->redirect(array('controller'=>'posts','action'=>'view',$this->request->data['PostsTag']['post_id']));
-	            } else {
-	                $this->Session->setFlash('failed!');
-	                $this->redirect(array('controller'=>'posts','action'=>'view',$this->request->data['PostsTag']['post_id']));
-	            }
-        	}
-        	*/
         	
 
 			if ($this->request->is('post')) {//①タグの存在確認　	
