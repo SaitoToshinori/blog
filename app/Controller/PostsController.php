@@ -16,53 +16,15 @@ class PostsController extends AppController {
         $this->Post->id = $this->request->params['id'];
         $this->set('post', $this->Post->read());
         $id = $this->Post->read();
-        //var_dump($id['Post']['id']);//14
-        /*
-        $branch = array(
-            'post_id' => $id['Post']['id'],
-            'user_id' => $this->Auth->user('id')
-            );
-        $this->set('check', $branch);
-        $search = $this->Favorite->find('count', $branch);
-        */
-/*	$creteria = [
-        	'Favorite.post_id' => $this->request->params['id'],
-     		'Favorite.user_id' => $this->Auth->user('id'),
-	];
-var_dump($creteria);
-*/
-	$result = $this->Favorite->find('first', [
-		//'conditions' => $creteria
-		'conditions' => [
-        		'Favorite.post_id' => $this->request->params['id'],
-     			'Favorite.user_id' => $this->Auth->user('id'),
-		]
-	]);
-    var_dump($result);
-    var_dump($this->Auth->user('id'));
-    $this->set('check', $result);
-//var_dump("aaaaaaaaa");
-//var_dump($result);
-        //var_dump($this->Post->read());
-        //$this->set('posts', $this->Post->find('all'));
-        // $this->set('post', $this->Post->find('all', array(
-        //     'conditions' => array('Post.id' => $this->request->params['id']))));
-        // var_dump($this->Post->find('all', array(
-        //     'conditions' => array('Post.id' => $this->request->params['id']))));
-        // /*var_dump($this->Post->find('all', array(
-        // 'conditions' => array('Post.id' => $this->request->params['id']))));
-        // exit;*/
+	    $result = $this->Favorite->find('first', [
+    		'conditions' => [
+            		'Favorite.post_id' => $this->request->params['id'],
+         			'Favorite.user_id' => $this->Auth->user('id'),
+    		]
+    	    ]);
+        $this->set('check', $result);
     }
-    
 
-    /*
-    public function view($id = null) {
-        $this->Post->id = $id;
-        $this->set('post', $this->Post->read());
-        var_dump($this->Post->read());
-        
-    }
-    */
     public function add() {
         
         

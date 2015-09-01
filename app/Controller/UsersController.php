@@ -8,17 +8,13 @@ class UsersController extends AppController {
 
     public function beforeFilter() {
         parent::beforeFilter();
-        // ユーザー自身による登録とログアウトを許可する
         $this->Auth->allow('add', 'logout');
 
         
     }
 
     public function index() {
-       /* $this->User->recursive = 0;
-        $this->set('users', $this->paginate());*/
         $this->set('posts', $this->Post->find('all'));
-        //$this->set('posts', $this->Post->findAllByuser_id($this->Auth->user('id')));
         $this->set('title_for_layout', '記事一覧');
         $this->set('users', $this->User->find('all'));
         
@@ -91,10 +87,7 @@ class UsersController extends AppController {
     public function login() {
         
         if ($this->request->is('post')){
-            if ($this->Auth->login()) 
-        //正しい値が帰ってきている
-            {
-
+            if ($this->Auth->login()) {
                 $this->redirect(array('action' => 'index'));
             } else {
                 $this->Session->setFlash(__('Invalid username or password, try again'));
@@ -109,27 +102,13 @@ class UsersController extends AppController {
 
     
     public function mypage() {
-//$this->log("mypage start", 'debug');
-     //   $this->set('posts', $this->Post->find('all'));
-//$this->log($this->Post->find('all'), 'debug');
-        //debug($limited);//値入っていました。
-//$this->log($limited['User'], 'debug');
         $this->set('user_posts', $this->Post->findAllByUserId($this->request->params['id']));
-        
         $this->set('favorites', $this->Favorite->find('all', array(
             'fields'     => array('Post.id', 'Post.title', 'Favorite.id'),
             'conditions' => array(
             'Favorite.user_id' => $this->request->params['id']
             )
             )));
-        /*var_dump($this->Favorite->find('all', array(
-            'conditions' => array(
-            'user_id' => $this->request->params['id']
-            )
-            )));
-            */
-//$this->log($this->Post->findAllByuser_id($posts['User']['id']), 'debug');
-        //$this->set('posts', $this->Post->findAllByuser_id($this->Auth->user('id')));
     }
         
     
