@@ -4,7 +4,7 @@ class UsersController extends AppController {
 
     public $helpers = array('Html', 'Form');
 
-    public $uses = array('User', 'Post');
+    public $uses = array('User', 'Post', 'Favorite');
 
     public function beforeFilter() {
         parent::beforeFilter();
@@ -115,6 +115,19 @@ class UsersController extends AppController {
         //debug($limited);//値入っていました。
 //$this->log($limited['User'], 'debug');
         $this->set('user_posts', $this->Post->findAllByUserId($this->request->params['id']));
+        
+        $this->set('favorites', $this->Favorite->find('all', array(
+            'fields'     => array('Post.id', 'Post.title', 'Favorite.id'),
+            'conditions' => array(
+            'Favorite.user_id' => $this->request->params['id']
+            )
+            )));
+        /*var_dump($this->Favorite->find('all', array(
+            'conditions' => array(
+            'user_id' => $this->request->params['id']
+            )
+            )));
+            */
 //$this->log($this->Post->findAllByuser_id($posts['User']['id']), 'debug');
         //$this->set('posts', $this->Post->findAllByuser_id($this->Auth->user('id')));
     }
