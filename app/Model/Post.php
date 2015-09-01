@@ -23,7 +23,7 @@ class Post extends AppModel {
             'classname'                     => 'Tag',
             'joinTable'                     => 'posts_tags',
             'foreignKey'                    => 'post_id',
-            'associationForeignKey'         => 'tag_id',//posts_tagsから変える(ドキュメントを参考に)
+            'associationForeignKey'         => 'tag_id',
             'unique'                        => 'true',
             'conditions'                    => '',
             'fields'                        => '',
