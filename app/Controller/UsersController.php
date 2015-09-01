@@ -17,7 +17,7 @@ class UsersController extends AppController {
         $this->set('posts', $this->Post->find('all'));
         $this->set('title_for_layout', '記事一覧');
         $this->set('users', $this->User->find('all'));
-        
+        var_dump($this->Auth->user('id'));
     }
 
     public function view($id = null) {
@@ -33,15 +33,12 @@ class UsersController extends AppController {
     public function add() {
         if ($this->request->is('post')) {
             $this->User->create();
-
-            if ($this->User->save($this->request->data)) {
-                        $data = array(
-                          'email' => $this->request->data['User']['email'],
-                          'password' => $this->request->data['User']['password']
-                        );
-                if ($this->Auth->login($data)) {
+            $user = $this->User->save($this->request->data);
+            if ($user) {
+                if ($this->Auth->login($user['User']))//ここに引数を入れないと、なんにも返ってこない模様                     
+                {
                     $this->Session->setFlash(__('The user has been saved'));
-                    $this->redirect(array('action' => 'mypage'));
+                    $this->redirect(['controller'=>'users','action'=>'index']);
                 }
             } else {
                 $this->Session->setFlash(__('The user could not be saved. Please, try again.'));
