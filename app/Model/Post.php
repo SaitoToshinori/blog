@@ -2,7 +2,8 @@
 
 
 class Post extends AppModel {
-    public $hasMany = "Comment";
+    public $hasMany = ['Comment', 'Favorite'];
+    //public $hasMany = "Favorite";
     
     public $validate = array(
         'title' => array(
