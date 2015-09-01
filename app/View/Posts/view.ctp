@@ -1,7 +1,17 @@
 <h2><?php echo h($post['Post']['title']); ?></h2>
 
 <p><?php echo h($post['Post']['body']); ?></p>
+<?php if(!empty($check) or $post['User']['id'] == $auth->user('id')) {
+		echo '既にお気に入りしているか,お気に入りできません！';
+} else {
+		echo $this->Form->create('Favorite', array('action'=>'add'));
+		echo $this->Form->input('Favorite.post_id',array('type'=>'hidden','value'=>$post['Post']['id']));
+		echo $this->Form->input('Favorite.user_id', array('type'=>'hidden', 'value'=>$auth->user('id')));
+		echo $this->Form->end('お気に入り');
+}
 
+
+?>
 <h2>Comments</h2>
 <ul>
 <?php foreach ((array)$post['Comment'] as $comment): ?>
@@ -19,7 +29,7 @@
 <ul>
 <?php foreach ((array)$post['Tag'] as $tag): ?>
 
-<li id="tag_<?php echo h($tag['name']); ?>">
+<li id="tag_<?php echo h($tag['id']); ?>">
 <?php echo $this->Html->link(h($tag['name']),'/tags/view/'.$tag['id']) ?>
 
 <?php
@@ -66,7 +76,7 @@ $(function() {
     $('a.delete').click(function(e) {
         if (confirm('sure?')) {
             $.post('/blog/tags/delete/'+$(this).data('tag-id'), {}, function(res) {
-                $('#comment_'+res.id).fadeOut();
+                $('#tag_'+res.id).fadeOut();
             }, "json");
         }
         return false;
@@ -76,6 +86,20 @@ $(function() {
 
 
  
-
+<!--
+if(自分の記事ではないのなら or まだ押されていないのなら) {
+	formヘルパーでお気に入りボタンを作る。
+	押されたら押せないようにチェンジ	
+} else {
+	お気に入りできません
+}
+//以下のはおおまかな方針
+お気に入りの登録方法で
+フォームヘルパーを使って登録をする。
+お気に入りがされていなかったら、お気に入りにする、というボタンを表示して、
+すでにされている、もしくは自分の記事なら、お気に入り済または、お気に入りできませんという表示にする。
+できないような仕組みを考えなくては！
+裏っかわでpostとuserの情報をひもづける
+-->
 
 
