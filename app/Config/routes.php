@@ -34,6 +34,15 @@
 		array('controller' => 'users', 'action' => 'mypage'),
     	array("id"=>"[0-9]+")
 );
+	Router::connect("/posts/view/:id",
+		array('controller' => 'posts', 'action' => 'view'),
+    	array("id"=>"[0-9]+")
+);
+	Router::connect("/tags/view/:id",
+		array('controller' => 'tags', 'action' => 'view'),
+    	array("id"=>"[0-9]+")
+);
+
 
 /**
  * Load all plugin routes. See the CakePlugin documentation on
@@ -46,3 +55,4 @@
  * the built-in default routes.
  */
 	require CAKE . 'Config' . DS . 'routes.php';
+

@@ -1,8 +1,5 @@
 <h1>トップページ</h1>
 
-
-<?php echo $this->Html->link('ログアウト', array('action'=>'logout')); ?> 
-
 <ul>
 
 <?php foreach ($posts as $post): ?>

@@ -3,7 +3,11 @@
 class PostsController extends AppController {
     public $helpers = array('Html', 'Form');
     
-    public $uses = array('User', 'Post');
+
+    public $uses = array('User', 'Post', 'Tag', 'PostsTag', 'Comment', 'Favorite');
+
+
+
 
     public function index() {
         $this->set('posts', $this->Post->find('all'));
@@ -11,15 +15,24 @@ class PostsController extends AppController {
     }
     
     public function view($id = null) {
-        $this->Post->id = $id;
+        $this->Post->id = $this->request->params['id'];
         $this->set('post', $this->Post->read());
+
+        $id = $this->Post->read();
+	    $result = $this->Favorite->find('first', [
+    		'conditions' => [
+            		'Favorite.post_id' => $this->request->params['id'],
+         			'Favorite.user_id' => $this->Auth->user('id'),
+    		]
+    	    ]);
+        $this->set('check', $result);
     }
-    
+
     public function add() {
         
         
         if ($this->request->is('post')) {
-            $this->request->data['Post']["user_id"] = $this->Auth->user('id');
+            $this->request->data['Post']['user_id'] = $this->Auth->user('id');
             
             if ($this->Post->save($this->request->data)) {
                 
@@ -61,6 +74,30 @@ class PostsController extends AppController {
         }
         $this->redirect(array('action'=>'index'));
     }
+    
+    public function search() {
 
+        if($this->request->is('get')) {
+            $title = $this->request->query('body');
+            $strpos = strpos($title, " ");
+            if(empty($title) or empty($strpos)) {
+                $this->Session->setFlash('入力しなければ検索できません。');
+                $this->redirect(array('action'=>'index'));
+            }
+            $result = $this->Post->find('all', array(
+                'conditions' => array(
+                    'Post.title LIKE' => '%'. $title. '%'
+                    )
+                ));
+            if(!empty($result)) {
+                $this->set('search', $result);
+                $this->set('keyword', $title);
+            } else {
+                $this->Session->setFlash('記事がありませんでした。');
+                $this->redirect(array('action'=>'index'));                
+            }
+
+        }
+    }
+    
 }
-

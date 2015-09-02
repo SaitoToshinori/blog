@@ -1,7 +1,5 @@
-<h1><?php echo $user_posts[0]['User']['username']?>のマイページ</h1>
+<h1>マイページ</h1>
 
-
-<?php echo $this->Html->link('ログアウト', array('action'=>'logout')); ?> 
 
 <ul>
 
@@ -15,6 +13,23 @@
 </li>
 <?php endforeach; ?>
 
+</ul>
 
+<h2>気に入り一覧</h2>
+
+<ul>
+
+<?php foreach ($favorites as $post): ?>
+<?php var_dump($post); ?>
+
+
+
+<li>
+<?php echo $this->Html->link($post['Post']['title'],'/posts/view/'.$post['Post']['id']);?>
+<?php echo $this->Form->postLink('削除', array('controller' => 'favorites', 'action' => 'delete', $post['Favorite']['id'])); ?>
+
+
+</li>
+<?php endforeach; ?>
 
 </ul>

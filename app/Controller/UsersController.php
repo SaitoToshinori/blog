@@ -4,23 +4,20 @@ class UsersController extends AppController {
 
     public $helpers = array('Html', 'Form');
 
-    public $uses = array('User', 'Post');
+    public $uses = array('User', 'Post', 'Favorite');
 
     public function beforeFilter() {
         parent::beforeFilter();
-        // ユーザー自身による登録とログアウトを許可する
         $this->Auth->allow('add', 'logout');
 
         
     }
 
     public function index() {
-       /* $this->User->recursive = 0;
-        $this->set('users', $this->paginate());*/
         $this->set('posts', $this->Post->find('all'));
-        //$this->set('posts', $this->Post->findAllByuser_id($this->Auth->user('id')));
         $this->set('title_for_layout', '記事一覧');
         $this->set('users', $this->User->find('all'));
+        var_dump($this->Auth->user('id'));
     }
 
     public function view($id = null) {
@@ -36,13 +33,18 @@ class UsersController extends AppController {
     public function add() {
         if ($this->request->is('post')) {
             $this->User->create();
-            if ($this->User->save($this->request->data)) {
-                $this->Session->setFlash(__('The user has been saved'));
-                $this->redirect(array('action' => 'mypage'));
+            $user = $this->User->save($this->request->data);
+            if ($user) {
+                if ($this->Auth->login($user['User']))//ここに引数を入れないと、なんにも返ってこない模様                     
+                {
+                    $this->Session->setFlash(__('The user has been saved'));
+                    $this->redirect(['controller'=>'users','action'=>'index']);
+                }
             } else {
                 $this->Session->setFlash(__('The user could not be saved. Please, try again.'));
             }
         }
+    
     }
 
     public function edit($id = null) {
@@ -80,11 +82,9 @@ class UsersController extends AppController {
     
 
     public function login() {
+        
         if ($this->request->is('post')){
-            if ($this->Auth->login()) 
-        //正しい値が帰ってきている
-            {
-
+            if ($this->Auth->login()) {
                 $this->redirect(array('action' => 'index'));
             } else {
                 $this->Session->setFlash(__('Invalid username or password, try again'));
@@ -99,14 +99,13 @@ class UsersController extends AppController {
 
     
     public function mypage() {
-//$this->log("mypage start", 'debug');
-     //   $this->set('posts', $this->Post->find('all'));
-//$this->log($this->Post->find('all'), 'debug');
-        //debug($limited);//値入っていました。
-//$this->log($limited['User'], 'debug');
         $this->set('user_posts', $this->Post->findAllByUserId($this->request->params['id']));
-//$this->log($this->Post->findAllByuser_id($posts['User']['id']), 'debug');
-        //$this->set('posts', $this->Post->findAllByuser_id($this->Auth->user('id')));
+        $this->set('favorites', $this->Favorite->find('all', array(
+            'fields'     => array('Post.id', 'Post.title', 'Favorite.id'),
+            'conditions' => array(
+            'Favorite.user_id' => $this->request->params['id']
+            )
+            )));
     }
         
     

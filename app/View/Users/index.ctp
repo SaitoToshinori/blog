@@ -1,5 +1,4 @@
 <h2>ユーザー一覧</h2>
-<?php echo $this->Html->link('ログアウト', array('action'=>'logout')); ?> 
 <ul>
 
 

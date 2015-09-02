@@ -49,15 +49,17 @@ class User extends AppModel {
 	}
 
 	public $name = 'User';
+    //public $hasMany = "";
 	public $hasMany = array('Post' =>
-                    array('className' => 'Post',
-                          'conditions' => '',
-                          'order' => '',
-                          'foreignKey' => 'user_id',
-                          'dependent' => true,
-                          'exclusive' => false,
-                          'finderQuery' => ''
-                    )
+                            array('className' => 'Post',
+                                  'conditions' => '',
+                                  'order' => '',
+                                  'foreignKey' => 'user_id',
+                                  'dependent' => true,
+                                  'exclusive' => false,
+                                  'finderQuery' => ''
+                            ),
+                            'Favorite'
                   );
 
 

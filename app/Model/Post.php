@@ -1,9 +1,9 @@
 <?php
 
 
-
 class Post extends AppModel {
-    public $hasMany = "Comment";
+    public $hasMany = ['Comment', 'Favorite'];
+    //public $hasMany = "Favorite";
     
     public $validate = array(
         'title' => array(
@@ -17,5 +17,25 @@ class Post extends AppModel {
 
     public $name = 'Post';
     public $belongsTo = 'User';
+
+    public $hasAndBelongsToMany = array(
+        'Tag' =>
+           array(
+            'classname'                     => 'Tag',
+            'joinTable'                     => 'posts_tags',
+            'foreignKey'                    => 'post_id',
+            'unique'                        => 'true',
+            'conditions'                    => '',
+            'fields'                        => '',
+            'order'                         => '',
+            'limit'                         => '',
+            'offset'                        => '',
+            'finderQuery'                   => '',
+            'deleteQuery'                   => '',
+            'insertQuery'                   => ''
+        )
+
+
+    );
 }
 

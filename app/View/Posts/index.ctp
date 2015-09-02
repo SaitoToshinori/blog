@@ -1,15 +1,19 @@
-<div>
-	
-</div>
+<h2>記事検索</h2>
+
+
+
+<?php
+echo $this->Form->create('Post', array('type' => 'get', 'action' => 'search'));
+echo $this->Form->input('body', array('rows' =>1));
+echo $this->Form->end('検索');?>
+
+
 <h2>記事一覧</h2>
 
 <ul>
 <?php foreach ($posts as $post) : ?>
 <li id="post_<?php echo h($post['Post']['id']); ?>">
 <?php
-// debug($post);
-// echo h($post['Post']['title']);
-// 
 echo $this->Html->link($post['Post']['title'],'/posts/view/'.$post['Post']['id']);
 ?> 
 <?php echo $this->Html->link($post['User']['username'],'/users/mypage/'.$post['User']['id']); ?>
