@@ -76,8 +76,14 @@ class PostsController extends AppController {
     }
     
     public function search() {
+
         if($this->request->is('get')) {
             $title = $this->request->query('body');
+            $strpos = strpos($title, " ");
+            if(empty($title) or empty($strpos)) {
+                $this->Session->setFlash('入力しなければ検索できません。');
+                $this->redirect(array('action'=>'index'));
+            }
             $result = $this->Post->find('all', array(
                 'conditions' => array(
                     'Post.title LIKE' => '%'. $title. '%'
