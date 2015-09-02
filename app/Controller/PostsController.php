@@ -74,12 +74,36 @@ class PostsController extends AppController {
         }
         $this->redirect(array('action'=>'index'));
     }
-    /*
+    
     public function search() {
+        if($this->request->is('get')) {
+            $title = $this->request->query('body');
+            $result = $this->Post->find('all', array(
+                'conditions' => array(
+                    'Post.title LIKE' => '%'. $title. '%'//エスケープ処理でミス？%とか入れるまでは成功してた
+                    )
+                ));
+                //var_dump($result);
+                //exit;
+                //正常な動作している
+            //いかが正しい値が吐いいているのにすべて記事がない、となる
+            if(!empty($result)/*条件分の中身もtrue*/) {
+                $this->set('search', $result);
+                $this->set('keyword', $title);
+                //$this->redirect(array('action'=>'search'));
+                //からじゃなかったら結果のページヘ遷移。
+            } else {
+                $this->Session->setFlash('記事がありませんでした。');
+                $this->redirect(array('action'=>'index'));                
+                //空だったら、元のページへリダイレクトして見つかりませんでした。
+            }
+
+        }
+        /*
         もしgetでアクセスが来たら(検索ということもあり)
         検索キーワードをあいまい検索として、データを取得する。この時にLIKEを使ったり、%にエスケープ処理を施す
         上の結果を変数としてビューに渡す
-        また、検索キーワードもビューに渡す
+        また、検索キーワードもビューに渡す*/
     }
-    */
+    
 }

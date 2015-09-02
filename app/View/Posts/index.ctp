@@ -3,6 +3,16 @@
 fotmヘルパーを使うがtypeでgetメソッドを使うように命令する
 そこに注意するのみ？
 -->
+<h2>記事検索</h2>
+
+
+
+<?php
+echo $this->Form->create('Post', array('type' => 'get', 'action' => 'search'));
+echo $this->Form->input('body', array('rows' =>1));
+echo $this->Form->end('検索');?>
+
+
 <h2>記事一覧</h2>
 
 <ul>
