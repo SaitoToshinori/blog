@@ -33,6 +33,37 @@
 <?php endforeach; ?>
 
 </ul>
+
+<h2>占い結果</h2>
+
+<ul>
+
+<?php foreach ($divination as $result): ?>
+<?php $detail = $result['details'] ; ?>
+
+
+
+
+<li>
+<?php  echo $detail['type'] ;?>
+</li>
+<li>
+<?php  echo $detail['typen'];?>
+</li>
+<?php  echo $detail['attribute']["@"];?>
+<li>
+<?php  echo $detail['starn'];?>
+</li>
+<li>
+<?php  echo $detail['un'];?>
+</li>
+<li>
+<?php  echo $detail['en'];?>
+</li>
+
+<?php endforeach; ?>
+
+</ul>
 <!--
 連想配列として占いの結果が現れるので、それを例によってforeachで回して結果を見れるようにする。
 -->
