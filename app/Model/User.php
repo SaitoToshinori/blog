@@ -29,9 +29,27 @@ class User extends AppModel {
                 'message' => 'A password is required'
             )
         ),
+        'birthday(ex:1999-02-12)' => array(
+            'rule1' => array(
+                'rule' => 'alphaNumeric',
+                'required' => 'true',
+                'message' => 'A birthday is required'
+            )
+            /*'rule2' => array(
+                'rule' => array('date', 'ymd'),
+                'message' => 'yy-mm-dd もしくは yyyy-mm-dd'
+            )*/
+        ),
         'role' => array(
             'valid' => array(
                 'rule' => array('inList', array('admin', 'author')),
+                'message' => 'Please enter a valid role',
+                'allowEmpty' => false
+            )
+        ),//生年月日はymadを使うが、注意事項としてカラムをy,m,dごとに分けて保存できるかどうか(パラメーターの)
+        'sex' => array(
+            'valid' => array(
+                'rule' => array('inList', array('female', 'male')),
                 'message' => 'Please enter a valid role',
                 'allowEmpty' => false
             )
