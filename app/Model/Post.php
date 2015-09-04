@@ -12,6 +12,10 @@ class Post extends AppModel {
         ),
         'body' => array(
             'rule' => 'notEmpty'
+        ),
+        'image' => array(
+            'rule' => array('url'),
+            'message' => 'URLを入力してください'
         )
     );
 

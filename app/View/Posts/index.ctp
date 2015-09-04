@@ -41,14 +41,16 @@ pagenatorで以下のものを作る
 <table>
      
     <tr>
-        
+        <th>サムネイル</th>
         <th>Title</th>
         <th>編集</th>
         <th>削除</th>
     </tr>
 
     <?php foreach ($Posts as $Post) :?>
+        <?php var_dump($Post['Post']['image']); ?>
     <tr>
+        <td><?php echo $this->Html->image($Post['Post']['image'], array('width' =>'160px', 'height' => '160px')); ?></td>
         <td><?php echo $Post['Post']['title']; ?></td>
         <td><?php echo $this->Html->link('編集', array('action'=>'edit', $Post['Post']['id'])); ?> </td>
         <td><?php echo $this->Html->link('削除', '#', array('class'=>'delete', 'data-post-id'=>$Post['Post']['id'])); ?></td>       
