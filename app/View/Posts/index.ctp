@@ -7,7 +7,16 @@ echo $this->Form->create('Post', array('type' => 'get', 'action' => 'search'));
 echo $this->Form->input('body', array('rows' =>1));
 echo $this->Form->end('検索');?>
 
+<!--
+課題整理
+Post一覧が出ているページ全てにページングをつける
+ページングは、1ページに10Postを表示する
+ページングには、全Post件数を表示する
+pagenatorで以下のものを作る
+前のページ、次のページに行くボタンを作る
+総ポスト数が見れるようにする
 
+-->
 <h2>記事一覧</h2>
 
 <ul>

@@ -4,7 +4,7 @@ class PostsController extends AppController {
     public $helpers = array('Html', 'Form');
     
 
-    public $uses = array('User', 'Post', 'Tag', 'PostsTag', 'Comment', 'Favorite');
+    public $uses = array('Post', 'User', 'Tag', 'PostsTag', 'Comment', 'Favorite');
 
 
 
@@ -12,6 +12,20 @@ class PostsController extends AppController {
     public function index() {
         $this->set('posts', $this->Post->find('all'));
         $this->set('title_for_layout', '記事一覧');
+        /*
+        課題整理
+        Post一覧が出ているページ全てにページングをつける
+        ページングは、1ページに10Postを表示する
+        ページングには、全Post件数を表示する
+        大まかな方針
+        1ページに付き10件だけ表示されるようにする
+        記事の総件数を把握するために記事の全件数を把握する
+        細かな方針
+        ページネーションヘルパーを使い、記事全件取得をする
+        その際に条件として1ページに付き10記事しか表示されないような条件を設定する
+        2ページ目に行けるような仕組みを作る
+        前のページに戻れるような仕組みを作る
+        */
     }
     
     public function view($id = null) {
