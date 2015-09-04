@@ -30,11 +30,11 @@ class User extends AppModel {
             )
         ),
         'birthday(ex:1999-02-12)' => array(
-            'rule1' => array(
-                'rule' => 'alphaNumeric',
-                'required' => 'true',
+                'rule' => 'numeric',
+                'required' => true,
+                'allowEmpty' => false,
                 'message' => 'A birthday is required'
-            )
+            
             /*'rule2' => array(
                 'rule' => array('date', 'ymd'),
                 'message' => 'yy-mm-dd もしくは yyyy-mm-dd'

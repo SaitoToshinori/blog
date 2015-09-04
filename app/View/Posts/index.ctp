@@ -41,6 +41,7 @@ pagenatorで以下のものを作る
 <table>
      
     <tr>
+        
         <th>Title</th>
         <th>編集</th>
         <th>削除</th>
