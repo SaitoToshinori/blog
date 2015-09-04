@@ -6,12 +6,16 @@ class PostsController extends AppController {
 
     public $uses = array('Post', 'User', 'Tag', 'PostsTag', 'Comment', 'Favorite');
 
-
+     public $paginate = array (
+        'limit' => 10,
+    );
 
 
     public function index() {
+        
+        $this->set('Posts', $this->paginate());
         $this->set('posts', $this->Post->find('all'));
-        $this->set('title_for_layout', '記事一覧');
+        //$this->set('title_for_layout', '記事一覧');
         /*
         課題整理
         Post一覧が出ているページ全てにページングをつける
