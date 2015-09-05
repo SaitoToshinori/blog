@@ -29,9 +29,31 @@ class User extends AppModel {
                 'message' => 'A password is required'
             )
         ),
+        'birthday' => array(
+            'birthdayRule-1' => array(
+                    'rule' => 'numeric',
+                    'message' => '半角数字のみ入力可能です。'
+            ),
+            'birthdayRule-2' => array(
+                    'rule' => 'notEmpty',
+                    'required' => true,
+                    'message' => '入力必須です。'
+            ),
+            'birthdayRule-3' => array(
+                    'rule' => array( 'between', 8, 8),
+                    'message' => '半角数字で8文字ちょうどで入力してください。'
+            )
+        ),    
         'role' => array(
             'valid' => array(
                 'rule' => array('inList', array('admin', 'author')),
+                'message' => 'Please enter a valid role',
+                'allowEmpty' => false
+            )
+        ),//生年月日はymadを使うが、注意事項としてカラムをy,m,dごとに分けて保存できるかどうか(パラメーターの)
+        'sex' => array(
+            'valid' => array(
+                'rule' => array('inList', array('female', 'male')),
                 'message' => 'Please enter a valid role',
                 'allowEmpty' => false
             )

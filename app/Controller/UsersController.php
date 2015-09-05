@@ -106,6 +106,43 @@ class UsersController extends AppController {
             'Favorite.user_id' => $this->request->params['id']
             )
             )));
+        $year =  substr($this->Auth->user('birthday'), 0, 4);
+        $month =  substr($this->Auth->user('birthday'), 4, 2);
+        $day =  substr($this->Auth->user('birthday'), 6, 2);//以上3つ正
+        $s = '';
+        if ($this->Auth->user('sex') === 'male') {
+            $s = 1;
+        }
+        $baseurl = 'http://bp.a-uranai.com/f';
+        $data = array(
+            'xml' => 1,
+            'y' => $year,
+            'm' => $month,
+            'd' => $day,
+            's' => $s
+            );
+        $query = http_build_query($data);
+        $url = $baseurl . '?' . $query;
+        //var_dump($url);
+        //exit;
+
+        //App::uses('HttpSocket', 'Network/Http');
+        //$HttpSocket = new HttpSocket();
+        //$results = $HttpSocket->get($url, array($data));
+        //App::uses('Xml', 'Utility');
+        $xmlArray = Xml::toArray(Xml::build($url));//ひとまずここにパラメタ入のURLを置くと結果が帰ってくることがわかった
+        $this->set('divination', $xmlArray);
+        /*getリクエストを送るための文章を書く。
+        ここで必要なのが、今ログインしているユーザーの登録した情報なので
+        生年月日の分割、性別を数字で表し、パラメーターに沿った形で表せるようにする
+        その後はhttpsocketを使いAPIへのアクセスを行い、結果を取得する。
+        結果は変数に格納されるので、それをダンプして、中身の構造をしっかり把握し、ビューで変数として扱えるように
+        する。
+        更にXmlで帰ってきたものをパースする。
+        パースを使うためにユーティリティクラスを使うように命令する
+        総した後にxmlを連想配列として扱う命令を書く。
+        */
+
     }
         
     
