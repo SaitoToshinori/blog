@@ -38,6 +38,10 @@ class User extends AppModel {
                     'rule' => 'notEmpty',
                     'required' => true,
                     'message' => '入力必須です。'
+            ),
+            'birthdayRule-3' => array(
+                    'rule' => array( 'between', 8, 8),
+                    'message' => '半角数字で8文字ちょうどで入力してください。'
             )
         ),    
         'role' => array(
