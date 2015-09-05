@@ -29,12 +29,16 @@ class User extends AppModel {
                 'message' => 'A password is required'
             )
         ),
-        'birthday(ex:1999-02-12)' => array(
-                'rule' => 'numeric',
-                'required' => true,
-                'allowEmpty' => false,
-                'message' => 'A birthday is required'
-            
+        'birthday' => array(
+            'birthdayRule-1' => array(
+                    'rule' => 'numeric',
+                    'message' => '半角数字のみ入力可能です。'
+            ),
+            'birthdayRule-2' => array(
+                    'rule' => 'notEmpty',
+                    'required' => true,
+                    'message' => '入力必須です。'
+            ),
             /*'rule2' => array(
                 'rule' => array('date', 'ymd'),
                 'message' => 'yy-mm-dd もしくは yyyy-mm-dd'

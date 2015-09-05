@@ -6,7 +6,7 @@
         echo $this->Form->input('email');
         echo $this->Form->input('password');
         echo $this->Form->input('birthday', array(
-            'label' => 'birthday(ex:1999-02-12)',
+            'label' => 'birthday(ex:19990212)',
             'dateFormat' => 'YMD'
             ));
         /*echo $this->Form->input('birthday', array(
